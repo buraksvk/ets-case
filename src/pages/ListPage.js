@@ -7,7 +7,7 @@ function ListPage() {
 
     useEffect(() => {
         if (window.localStorage.getItem("hotelData")) {
-            setList(JSON.parse(window.localStorage.getItem("hotelData")))
+            setList(JSON.parse(window.localStorage.getItem("hotelData")).sort((a, b) => parseFloat(b.time) - parseFloat(a.time)));
         }
         else {
             setList([]);
@@ -47,18 +47,7 @@ function ListPage() {
         setOpen(false);
     }
 
-    // function mapper(array) {
-    //     var str = "[";
-    //     for (let i = 0; i < array.length; i++) {
-    //         str = str + '"' + array[i] + '"'
-    //         if (i == array.length - 1) {
-    //             str = str + "]"
-    //         } else {
-    //             str = str + ","
-    //         }
-    //     }
-    //     return str
-    // }
+
 
     return (
         <div className='header'>
@@ -90,7 +79,7 @@ function ListPage() {
                             <div className='hotel-box' key={"hotel-" + index}>
                                 <div className='row'>
                                     <div className='hotel-image'>
-                                        <img className="image" src="image/hotel-image.png" alt="hotel-image" />
+                                        <img className="image" src="image/hotel-image.png" alt="hotel-content" />
                                     </div>
                                     <div className='hotel-content-col'>
                                         <p className='hotel-title'>{item.hotel}</p>

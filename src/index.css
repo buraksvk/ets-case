@@ -1,11 +1,15 @@
 html body {
   font-family: 'Montserrat';
-  padding: 3% 30%
 }
-
 .header {
-  margin: 0 10%
+  margin: 3% 40%
 }
+@media only screen and (max-width: 900px) {
+  .header {
+    margin: 0 2%
+  }
+}
+/* LIST PAGE START*/
 
 .add-hotel-button{
   background-color: transparent;
@@ -86,7 +90,7 @@ html body {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   padding: 10px;
   margin-bottom: 20px;
-  width: 420px;
+  width: 400px;
   transition: all .5s ease;
 }
 .hotel-box:hover {
@@ -152,3 +156,51 @@ html body {
   display: flex;
   justify-content: space-between;
 }
+
+/* LIST PAGE END*/
+
+/* ADD PAGE START*/
+
+.input-label{
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 10px !important;
+}
+.input-text{
+  font-family: 'Montserrat';
+  font-size: 18px;
+  font-weight: 500;
+  padding:30px 20px;
+  border: 2px solid #dfe3e9;
+  border-radius: 5px;
+  width: 300px;
+}
+.submit-add{
+  border: none;
+  font-family: 'Montserrat';
+  font-size: 18px;
+  padding: 15px 35px;
+  border-radius: 8px;
+  margin-top: 10px;
+  color: #fff;
+  background-color: #2a81fd;
+  cursor: pointer;
+  transition: all .5s ease;
+}
+.submit-add:hover{
+  background-color: #126ff0;
+}
+textarea:focus, input:focus{
+  outline: none;
+}
+.check-icon{
+  font-size: 18px;
+}
+/* ADD PAGE END*/
+
+.button-area{
+  width: 345px;
+  text-align: right;
+}
+
+
