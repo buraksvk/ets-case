@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import { ArrowDownUp, ChevronDown } from 'react-bootstrap-icons';
 function ListPage() {
     const [list, setList] = useState([{ hotel: "Voyage Hotel", rating: 9.7, time: 1655146561 }, { hotel: "Maxx Royal Hotel", rating: 8.3, time: 1655146606 }, { hotel: "Vogue Hotel", rating: 7.5, time: 1655147906 }]);
 
@@ -44,8 +44,14 @@ function ListPage() {
                 <button className='add-hotel-button'>+</button>
                 <h1 className='title'>OTEL EKLE</h1>
             </div>
-            <div className='filter-button'>
-                Sıralama
+            <div className='filter-button space-between'>
+                <span>
+                    <ArrowDownUp className='icon' />
+                    <span style={{ marginLeft: "7px" }}>Sıralama</span>
+                </span>
+                <span>
+                    <ChevronDown color="#aaa" className='icon' />
+                </span>
             </div>
 
             {

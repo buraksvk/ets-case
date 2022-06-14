@@ -6,6 +6,7 @@ html body {
 .header {
   margin: 0 10%
 }
+
 .add-hotel-button{
   background-color: transparent;
   color: #2a81fd;
@@ -25,6 +26,26 @@ html body {
 }
 .header .title {
   font-size: 30px;
+}
+
+.filter-button {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  padding: 10px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  width: 220px;
+  transition: all .5s ease;
+  cursor: pointer;
+}
+.filter-button:hover {
+  background-color: #fcfcfc;
+  box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px;
+}
+
+.filter-button .icon {
+  vertical-align: middle;
 }
 
 .hotel-box {
@@ -95,4 +116,7 @@ html body {
   color: #fff;
   background-color: #2a81fd;
 }
-
+.space-between{
+  display: flex;
+  justify-content: space-between;
+}
