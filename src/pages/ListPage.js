@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowDownUp, ChevronDown } from 'react-bootstrap-icons';
+import mapper from '../helpers/mapper';
+
 function ListPage() {
     const [list, setList] = useState([]);
     const [open, setOpen] = useState(false)
-    const [filterBy, setFilterBy] = useState("up")
+    const [filterBy, setFilterBy] = useState("Sıralama")
 
     useEffect(() => {
         if (window.localStorage.getItem("hotelData")) {
@@ -15,6 +17,7 @@ function ListPage() {
         }
     }, [])
 
+
     const upRate = (index) => {
         let arr = list[index];
         if (arr.rating <= 9.9) {
@@ -23,6 +26,7 @@ function ListPage() {
                 return item.hotel !== arr.hotel
             }))
             setList([...list]);
+            window.localStorage.setItem("hotelData", mapper(list))
         }
 
     }
@@ -34,14 +38,15 @@ function ListPage() {
                 return item.hotel !== arr.hotel
             }))
             setList([...list]);
+            window.localStorage.setItem("hotelData", mapper(list))
         }
     }
 
     const selectFilter = (type) => {
         setFilterBy(type);
-        if (type === "up") {
+        if (type === "Puan (Artan)") {
             setList(list.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating)));
-        } else if (type === "down") {
+        } else if (type === "Puan (Azalan)") {
             setList(list.sort((a, b) => parseFloat(a.rating) - parseFloat(b.rating)));
         }
         setOpen(false);
@@ -58,7 +63,7 @@ function ListPage() {
             <div className='filter-button space-between' onClick={() => { setOpen(!open) }}>
                 <span>
                     <ArrowDownUp className='icon' />
-                    <span style={{ marginLeft: "7px" }}>Sıralama</span>
+                    <span style={{ marginLeft: "7px" }}>{filterBy}</span>
                 </span>
                 <span>
                     <ChevronDown color="#aaa" className='icon' />
@@ -67,8 +72,8 @@ function ListPage() {
             {
                 open ?
                     <div className='selection-box'>
-                        <div className='option' style={filterBy === "up" ? { backgroundColor: "#4894fd" } : {}} onClick={() => { selectFilter("up") }}>{"Puan (Artan)"}</div>
-                        <div className='option' style={filterBy === "down" ? { backgroundColor: "#4894fd" } : {}} onClick={() => { selectFilter("down") }}>{"Puan (Azalan)"}</div>
+                        <div className='option' style={filterBy === "up" ? { backgroundColor: "#4894fd" } : {}} onClick={() => { selectFilter("Puan (Artan)") }}>{"Puan (Artan)"}</div>
+                        <div className='option' style={filterBy === "down" ? { backgroundColor: "#4894fd" } : {}} onClick={() => { selectFilter("Puan (Azalan)") }}>{"Puan (Azalan)"}</div>
                     </div>
                     : null
             }
@@ -84,7 +89,7 @@ function ListPage() {
                                     <div className='hotel-content-col'>
                                         <p className='hotel-title'>{item.hotel}</p>
                                         <div className="hotel-rating-box">
-                                            <p className='hotel-rating'>{item.rating} Puan
+                                            <p className='hotel-rating'>{parseFloat(item.rating).toFixed(1)} Puan
                                             </p>
                                         </div>
                                         <div className='hotel-rating-button'>

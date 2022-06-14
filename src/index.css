@@ -190,11 +190,31 @@ html body {
 .submit-add:hover{
   background-color: #126ff0;
 }
+.submit-success{
+  border: none;
+  font-family: 'Montserrat';
+  font-size: 18px;
+  padding: 5px 35px 5px 25px;
+  border-radius: 8px;
+  margin-top: 10px;
+  color: #fff;
+  background-color: #63cd25;
+  cursor: pointer;
+  transition: all .5s ease;
+  vertical-align: top;
+}
+.submit-success:hover{
+  background-color: #53bb17;
+}
+.success-text{
+  position:relative;
+  top: -10px;
+}
 textarea:focus, input:focus{
   outline: none;
 }
 .check-icon{
-  font-size: 18px;
+  font-size: 37px;
 }
 /* ADD PAGE END*/
 
