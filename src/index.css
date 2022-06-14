@@ -19,6 +19,9 @@ html body {
   transition: all .5s ease;
   vertical-align: middle;
   margin-top: 12px;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
 }
 .add-hotel-button:hover{
   background-color: #2a81fd;

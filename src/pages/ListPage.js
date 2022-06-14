@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowDownUp, ChevronDown } from 'react-bootstrap-icons';
 function ListPage() {
-    const [list, setList] = useState([{ hotel: "Voyage Hotel", rating: 9.7, time: 1655146561 }, { hotel: "Maxx Royal Hotel", rating: 8.3, time: 1655146606 }, { hotel: "Vogue Hotel", rating: 7.5, time: 1655147906 }]);
+    const [list, setList] = useState([]);
     const [open, setOpen] = useState(false)
     const [filterBy, setFilterBy] = useState("up")
+
+    useEffect(() => {
+        if (window.localStorage.getItem("hotelData")) {
+            setList(JSON.parse(window.localStorage.getItem("hotelData")))
+        }
+        else {
+            setList([]);
+            window.localStorage.setItem("hotelData", "[]")
+        }
+    }, [])
 
     const upRate = (index) => {
         let arr = list[index];
@@ -29,31 +39,31 @@ function ListPage() {
 
     const selectFilter = (type) => {
         setFilterBy(type);
-        if(type === "up"){
+        if (type === "up") {
             setList(list.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating)));
-        }else if(type === "down"){
+        } else if (type === "down") {
             setList(list.sort((a, b) => parseFloat(a.rating) - parseFloat(b.rating)));
         }
-        setOpen(false)
+        setOpen(false);
     }
 
-    function mapper(array) {
-        var str = "[";
-        for (let i = 0; i < array.length; i++) {
-            str = str + '"' + array[i] + '"'
-            if (i == array.length - 1) {
-                str = str + "]"
-            } else {
-                str = str + ","
-            }
-        }
-        return str
-    }
+    // function mapper(array) {
+    //     var str = "[";
+    //     for (let i = 0; i < array.length; i++) {
+    //         str = str + '"' + array[i] + '"'
+    //         if (i == array.length - 1) {
+    //             str = str + "]"
+    //         } else {
+    //             str = str + ","
+    //         }
+    //     }
+    //     return str
+    // }
 
     return (
         <div className='header'>
             <div className='row'>
-                <button className='add-hotel-button'>+</button>
+                <a className='add-hotel-button' href='/add'>+</a>
                 <h1 className='title'>OTEL EKLE</h1>
             </div>
             <div className='filter-button space-between' onClick={() => { setOpen(!open) }}>
@@ -66,12 +76,12 @@ function ListPage() {
                 </span>
             </div>
             {
-                open ? 
-                <div className='selection-box'>
-                    <div className='option' style={filterBy === "up" ? {backgroundColor:"#4894fd"}:{}} onClick={() => {selectFilter("up")}}>{"Puan (Artan)"}</div>
-                    <div className='option' style={filterBy === "down" ? {backgroundColor:"#4894fd"}:{}} onClick={() => {selectFilter("down")}}>{"Puan (Azalan)"}</div>
-                </div>
-                :null
+                open ?
+                    <div className='selection-box'>
+                        <div className='option' style={filterBy === "up" ? { backgroundColor: "#4894fd" } : {}} onClick={() => { selectFilter("up") }}>{"Puan (Artan)"}</div>
+                        <div className='option' style={filterBy === "down" ? { backgroundColor: "#4894fd" } : {}} onClick={() => { selectFilter("down") }}>{"Puan (Azalan)"}</div>
+                    </div>
+                    : null
             }
             <div className='hotel-list'>
                 {
