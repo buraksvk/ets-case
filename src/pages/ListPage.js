@@ -29,6 +29,11 @@ function ListPage() {
 
     const selectFilter = (type) => {
         setFilterBy(type);
+        if(type === "up"){
+            setList(list.sort((a, b) => parseFloat(a.rating) - parseFloat(b.rating)));
+        }else if(type === "down"){
+            setList(list.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating)));
+        }
         setOpen(false)
     }
 
