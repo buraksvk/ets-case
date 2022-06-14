@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowDownUp, ChevronDown } from 'react-bootstrap-icons';
+import { ArrowDownUp, ChevronDown, X } from 'react-bootstrap-icons';
 import mapper from '../helpers/mapper';
 
 function ListPage() {
@@ -40,6 +40,18 @@ function ListPage() {
             setList([...list]);
             window.localStorage.setItem("hotelData", mapper(list))
         }
+    }
+
+    const removeHotel = (index) => {
+        setList(list.filter(function (item) {
+            return item.hotel !== list[index].hotel
+        }))
+        window.localStorage.setItem("hotelData", mapper(
+            list.filter(function (item) {
+                return item.hotel !== list[index].hotel
+            })
+        ))
+
     }
 
     const selectFilter = (type) => {
@@ -87,6 +99,11 @@ function ListPage() {
                                         <img className="image" src="image/hotel-image.png" alt="hotel-content" />
                                     </div>
                                     <div className='hotel-content-col'>
+                                        <div style={{ position: "relative" }}>
+                                            <button className='button-remove' onClick={() => { removeHotel(index) }}>
+                                                <X style={{ marginLeft: "-3px", marginTop: "1px" }} />
+                                            </button>
+                                        </div>
                                         <p className='hotel-title'>{item.hotel}</p>
                                         <div className="hotel-rating-box">
                                             <p className='hotel-rating'>{parseFloat(item.rating).toFixed(1)} Puan
@@ -98,9 +115,7 @@ function ListPage() {
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-
                         )
                     })
                 }

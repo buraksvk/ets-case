@@ -157,6 +157,23 @@ html body {
   justify-content: space-between;
 }
 
+.button-remove{
+  border: none;
+  height: 30px;
+  width: 30px;
+  background-color: #da1e28;
+  color: #fff;
+  font-size: 25px;
+  border-radius: 50%;
+  position:absolute;
+  top:-20px;
+  right:-30px;
+  transition: all .5s ease;
+}
+
+.button-remove:hover{
+  background-color: #eb212b;
+}
 /* LIST PAGE END*/
 
 /* ADD PAGE START*/
@@ -201,10 +218,6 @@ html body {
   background-color: #63cd25;
   cursor: pointer;
   transition: all .5s ease;
-  vertical-align: top;
-}
-.submit-success:hover{
-  background-color: #53bb17;
 }
 .success-text{
   position:relative;
