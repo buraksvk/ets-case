@@ -1,4 +1,98 @@
 html body {
   font-family: 'Montserrat';
-  padding: 10% 30%
+  padding: 3% 30%
 }
+
+.header {
+  margin: 0 10%
+}
+.add-hotel-button{
+  background-color: transparent;
+  color: #2a81fd;
+  border: 2px solid #2a81fd;
+  border-radius: 7px;
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+  font-size: 40px;
+  transition: all .5s ease;
+  vertical-align: middle;
+  margin-top: 12px;
+}
+.add-hotel-button:hover{
+  background-color: #2a81fd;
+  color: #fff;
+}
+.header .title {
+  font-size: 30px;
+}
+
+.hotel-box {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  padding: 10px;
+  margin-bottom: 20px;
+  width: 420px;
+  transition: all .5s ease;
+}
+.hotel-box:hover {
+  background-color: #fafafa;
+  box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.hotel-image {
+  padding: 0;
+}
+
+.hotel-image .image {
+  width: 140px;
+}
+
+.hotel-content-col {
+  margin-left: 20px;
+}
+
+.hotel-content-col .hotel-title{
+  margin: 0 !important;
+  font-size: 23px;
+  font-weight: 500;
+}
+.hotel-rating-box{
+  background-color: #f6f9fd;
+  border-radius: 7px;
+  padding: 8px;
+  width: 160px;
+  margin-top: 7px;
+}
+.hotel-rating-box .hotel-rating{
+  margin: 0 !important;
+  margin-bottom: 10px;
+  color: #0dc5bb;
+  font-size: 17px;
+  font-weight: 500;
+}
+.hotel-rating-button button{
+  text-transform: uppercase;
+  font-family: 'Montserrat';
+  background-color: transparent;
+  color: #2a81fd;
+  border: 1.5px solid #2a81fd;
+  border-radius: 7px;
+  padding: 9px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-right: 10px;
+  margin-top: 20px;
+  transition: all .5s ease;
+}
+.hotel-rating-button button:hover{
+  color: #fff;
+  background-color: #2a81fd;
+}
+
