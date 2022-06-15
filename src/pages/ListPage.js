@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowDownUp, ChevronDown, X, ChevronLeft, ChevronRight } from 'react-bootstrap-icons';
 import mapper from '../helpers/mapper';
 import pageCalculator from '../helpers/pageCalculator';
+import Popup from 'reactjs-popup';
 
 function ListPage() {
     const [list, setList] = useState([]);
@@ -9,7 +10,6 @@ function ListPage() {
     const [page, setPage] = useState(1);
     const [pagesArray, setPagesArray] = useState([])
     const [filterBy, setFilterBy] = useState("Sıralama");
-
 
     useEffect(() => {
         if (window.localStorage.getItem("hotelData")) {
@@ -58,7 +58,6 @@ function ListPage() {
                 return item.hotel !== list[index].hotel
             })
         ))
-
     }
 
     const selectFilter = (type) => {
@@ -108,9 +107,29 @@ function ListPage() {
                                         </div>
                                         <div className='hotel-content-col'>
                                             <div style={{ position: "relative" }}>
-                                                <button className='button-remove' onClick={() => { removeHotel(index) }}>
-                                                    <X style={{ marginLeft: "-3px", marginTop: "1px" }} />
-                                                </button>
+                                                <Popup
+                                                    trigger={<button className='button-remove'><X style={{ marginLeft: "-3px", marginTop: "1px" }} /></button>}
+                                                    modal
+                                                    
+                                                >
+                                                    {close => (
+                                                        <div className="modal">
+                                                            <button className="close" onClick={close}>
+                                                                &times;
+                                                            </button>
+                                                            <div className="header"> Oteli Sil </div>
+                                                            <div className="content">
+                                                                {' '}
+                                                                <b>{item.hotel}</b>’i silmek istediğinizden
+                                                                emin misiniz?
+                                                            </div>
+                                                            <div className="actions">
+                                                                <button className="modal-delete-button" onClick={() => {removeHotel(index); close()}}>OTELİ SİL</button>
+                                                                <button className="modal-cancel-button" onClick={() => {close()}}>VAZGEÇ</button>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </Popup>
                                             </div>
                                             <p className='hotel-title'>{item.hotel}</p>
                                             <div className="hotel-rating-box">
@@ -134,11 +153,11 @@ function ListPage() {
                 <button className='page-chevron' onClick={() => { page > 1 ? setPage(page - 1) : setPage(page) }}><ChevronLeft /></button>
                 {
                     pagesArray.map((item, index) => {
-                        return <button className='page-button' key={"page-" + index} style={page === index + 1 ? { fontWeight:"bold"}:{}} onClick={() => { setPage(item) }}>{item}</button>
+                        return <button className='page-button' key={"page-" + index} style={page === index + 1 ? { fontWeight: "bold" } : {}} onClick={() => { setPage(item) }}>{item}</button>
                     })
                 }
-            <button className='page-chevron' onClick={() => { page < (pagesArray.length) ? setPage(page + 1) : setPage(page) }}><ChevronRight /></button>
-        </div>
+                <button className='page-chevron' onClick={() => { page < (pagesArray.length) ? setPage(page + 1) : setPage(page) }}><ChevronRight /></button>
+            </div>
         </div >
     )
 }
