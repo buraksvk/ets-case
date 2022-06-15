@@ -23,6 +23,28 @@ function ListPage() {
 
     useEffect(() => {
         setPagesArray(pageCalculator(list.length));
+
+        if(filterBy === "Puan (Artan)"){
+            setList(list.sort((a, b) => {
+                if(parseFloat(b.rating) !== parseFloat(a.rating)){
+                    return parseFloat(b.rating) - parseFloat(a.rating)
+                }
+                else{
+                    return parseFloat(b.time) - parseFloat(a.time)
+                }
+            }));
+        }
+        else if(filterBy === "Puan (Azalan)"){
+            setList(list.sort((a, b) => {
+                if(parseFloat(a.rating) !== parseFloat(b.rating)){
+                    return parseFloat(a.rating) - parseFloat(b.rating)
+                }
+                else{
+                    return parseFloat(b.time) - parseFloat(a.time)
+                }
+            }));
+        }
+
     }, [list])
 
     const upRate = (index) => {
