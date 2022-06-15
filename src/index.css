@@ -235,5 +235,34 @@ textarea:focus, input:focus{
   width: 345px;
   text-align: right;
 }
-
-
+.pagination{
+  text-align: center;
+}
+.pagination .page-button{
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  font-family: 'Montserrat';
+  font-size: 18px;
+  font-weight: 500;
+  margin: 5px;
+  height:30px;
+  width:30px;
+  position: relative;
+  top: -4px;
+  cursor: pointer;
+  transition: all .5s ease;
+}
+.pagination .page-button:hover{
+  border-radius: 50%;
+  background-color: #eee;
+}
+.pagination .page-chevron{
+  border: none;
+  background-color: transparent;
+  font-family: 'Montserrat';
+  font-size: 20px;
+  font-weight: 500;
+  margin: 5px;
+  cursor: pointer;
+}

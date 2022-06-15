@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowDownUp, ChevronDown, X } from 'react-bootstrap-icons';
+import { ArrowDownUp, ChevronDown, X, ChevronLeft, ChevronRight } from 'react-bootstrap-icons';
 import mapper from '../helpers/mapper';
+import pageCalculator from '../helpers/pageCalculator';
 
 function ListPage() {
     const [list, setList] = useState([]);
-    const [open, setOpen] = useState(false)
-    const [filterBy, setFilterBy] = useState("Sıralama")
+    const [open, setOpen] = useState(false);
+    const [page, setPage] = useState(1);
+    const [pagesArray, setPagesArray] = useState([])
+    const [filterBy, setFilterBy] = useState("Sıralama");
+
 
     useEffect(() => {
         if (window.localStorage.getItem("hotelData")) {
@@ -17,6 +21,9 @@ function ListPage() {
         }
     }, [])
 
+    useEffect(() => {
+        setPagesArray(pageCalculator(list.length));
+    }, [list])
 
     const upRate = (index) => {
         let arr = list[index];
@@ -92,35 +99,47 @@ function ListPage() {
             <div className='hotel-list'>
                 {
                     list.map((item, index) => {
-                        return (
-                            <div className='hotel-box' key={"hotel-" + index}>
-                                <div className='row'>
-                                    <div className='hotel-image'>
-                                        <img className="image" src="image/hotel-image.png" alt="hotel-content" />
-                                    </div>
-                                    <div className='hotel-content-col'>
-                                        <div style={{ position: "relative" }}>
-                                            <button className='button-remove' onClick={() => { removeHotel(index) }}>
-                                                <X style={{ marginLeft: "-3px", marginTop: "1px" }} />
-                                            </button>
+                        if (index >= ((page - 1) * 5) && index < (page * 5)) {
+                            return (
+                                <div className='hotel-box' key={"hotel-" + index}>
+                                    <div className='row'>
+                                        <div className='hotel-image'>
+                                            <img className="image" src="image/hotel-image.png" alt="hotel-content" />
                                         </div>
-                                        <p className='hotel-title'>{item.hotel}</p>
-                                        <div className="hotel-rating-box">
-                                            <p className='hotel-rating'>{parseFloat(item.rating).toFixed(1)} Puan
-                                            </p>
-                                        </div>
-                                        <div className='hotel-rating-button'>
-                                            <button onClick={() => { upRate(index) }}>puan artır</button>
-                                            <button onClick={() => { downRate(index) }}>puan azalt</button>
+                                        <div className='hotel-content-col'>
+                                            <div style={{ position: "relative" }}>
+                                                <button className='button-remove' onClick={() => { removeHotel(index) }}>
+                                                    <X style={{ marginLeft: "-3px", marginTop: "1px" }} />
+                                                </button>
+                                            </div>
+                                            <p className='hotel-title'>{item.hotel}</p>
+                                            <div className="hotel-rating-box">
+                                                <p className='hotel-rating'>{parseFloat(item.rating).toFixed(1)} Puan
+                                                </p>
+                                            </div>
+                                            <div className='hotel-rating-button'>
+                                                <button onClick={() => { upRate(index) }}>puan artır</button>
+                                                <button onClick={() => { downRate(index) }}>puan azalt</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        )
+                            )
+                        }
+
                     })
                 }
             </div>
+            <div className='pagination'>
+                <button className='page-chevron' onClick={() => { page > 1 ? setPage(page - 1) : setPage(page) }}><ChevronLeft /></button>
+                {
+                    pagesArray.map((item, index) => {
+                        return <button className='page-button' key={"page-" + index} style={page === index + 1 ? { fontWeight:"bold"}:{}} onClick={() => { setPage(item) }}>{item}</button>
+                    })
+                }
+            <button className='page-chevron' onClick={() => { page < (pagesArray.length) ? setPage(page + 1) : setPage(page) }}><ChevronRight /></button>
         </div>
+        </div >
     )
 }
 export default ListPage
