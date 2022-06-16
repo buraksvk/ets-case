@@ -30,7 +30,7 @@ function ListPage() {
                     return parseFloat(b.rating) - parseFloat(a.rating)
                 }
                 else{
-                    return parseFloat(b.time) - parseFloat(a.time)
+                    return parseFloat(b.lastVote) - parseFloat(a.lastVote)
                 }
             }));
         }
@@ -40,7 +40,7 @@ function ListPage() {
                     return parseFloat(a.rating) - parseFloat(b.rating)
                 }
                 else{
-                    return parseFloat(b.time) - parseFloat(a.time)
+                    return parseFloat(b.lastVote) - parseFloat(a.lastVote)
                 }
             }));
         }
@@ -51,6 +51,7 @@ function ListPage() {
         let arr = list[index];
         if (arr.rating <= 9.9) {
             arr.rating = (parseFloat(parseFloat(arr.rating) + 0.1).toFixed(1))
+            arr.lastVote = (parseFloat(Date.now() / 1000).toFixed(0))
             setList(list.filter(function (item) {
                 return item.hotel !== arr.hotel
             }))
@@ -63,6 +64,7 @@ function ListPage() {
         let arr = list[index];
         if (arr.rating >= 0.1) {
             arr.rating = (parseFloat(parseFloat(arr.rating) - 0.1).toFixed(1))
+            arr.lastVote = (parseFloat(Date.now() / 1000).toFixed(0))
             setList(list.filter(function (item) {
                 return item.hotel !== arr.hotel
             }))

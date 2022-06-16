@@ -18,9 +18,9 @@ function AddPage() {
     }, [])
 
     const Submit = () => {
-        var listArray = list.concat({ hotel: value, rating: 0.0, time: parseFloat(Date.now() / 1000).toFixed(0) });
+        var listArray = list.concat({ hotel: value, rating: 0.0, time: parseFloat(Date.now() / 1000).toFixed(0), lastVote: parseFloat(Date.now() / 1000).toFixed(0) });
 
-        setList(list.concat({ hotel: value, rating: 0.0, time: parseFloat(Date.now() / 1000).toFixed(0) }));
+        setList(list.concat({ hotel: value, rating: 0.0, time: parseFloat(Date.now() / 1000).toFixed(0), lastVote: parseFloat(Date.now() / 1000).toFixed(0) }));
 
         isAdd(true);
 
