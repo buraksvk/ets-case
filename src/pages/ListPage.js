@@ -10,6 +10,7 @@ function ListPage() {
     const [page, setPage] = useState(1);
     const [pagesArray, setPagesArray] = useState([])
     const [filterBy, setFilterBy] = useState("Sıralama");
+    const [showRemove, setShowRemove] = useState(9999);
 
     useEffect(() => {
         if (window.localStorage.getItem("hotelData")) {
@@ -24,22 +25,22 @@ function ListPage() {
     useEffect(() => {
         setPagesArray(pageCalculator(list.length));
 
-        if(filterBy === "Puan (Artan)"){
+        if (filterBy === "Puan (Artan)") {
             setList(list.sort((a, b) => {
-                if(parseFloat(b.rating) !== parseFloat(a.rating)){
+                if (parseFloat(b.rating) !== parseFloat(a.rating)) {
                     return parseFloat(b.rating) - parseFloat(a.rating)
                 }
-                else{
+                else {
                     return parseFloat(b.lastVote) - parseFloat(a.lastVote)
                 }
             }));
         }
-        else if(filterBy === "Puan (Azalan)"){
+        else if (filterBy === "Puan (Azalan)") {
             setList(list.sort((a, b) => {
-                if(parseFloat(a.rating) !== parseFloat(b.rating)){
+                if (parseFloat(a.rating) !== parseFloat(b.rating)) {
                     return parseFloat(a.rating) - parseFloat(b.rating)
                 }
-                else{
+                else {
                     return parseFloat(b.lastVote) - parseFloat(a.lastVote)
                 }
             }));
@@ -124,17 +125,18 @@ function ListPage() {
                     list.map((item, index) => {
                         if (index >= ((page - 1) * 5) && index < (page * 5)) {
                             return (
-                                <div className='hotel-box' key={"hotel-" + index}>
+                                <div className='hotel-box' key={"hotel-" + index}
+                                    onMouseEnter={() => { setShowRemove(index) }}
+                                    onMouseLeave={() => { setShowRemove(9999) }}>
                                     <div className='row'>
                                         <div className='hotel-image'>
                                             <img className="image" src="image/hotel-image.png" alt="hotel-content" />
                                         </div>
                                         <div className='hotel-content-col'>
-                                            <div style={{ position: "relative" }}>
+                                            {showRemove === index ? <div style={{ position: "relative" }}>
                                                 <Popup
                                                     trigger={<button className='button-remove'><X style={{ marginLeft: "-3px", marginTop: "1px" }} /></button>}
                                                     modal
-                                                    
                                                 >
                                                     {close => (
                                                         <div className="modal">
@@ -148,13 +150,13 @@ function ListPage() {
                                                                 emin misiniz?
                                                             </div>
                                                             <div className="actions">
-                                                                <button className="modal-delete-button" onClick={() => {removeHotel(index); close()}}>OTELİ SİL</button>
-                                                                <button className="modal-cancel-button" onClick={() => {close()}}>VAZGEÇ</button>
+                                                                <button className="modal-delete-button" onClick={() => { removeHotel(index); close() }}>OTELİ SİL</button>
+                                                                <button className="modal-cancel-button" onClick={() => { close() }}>VAZGEÇ</button>
                                                             </div>
                                                         </div>
                                                     )}
                                                 </Popup>
-                                            </div>
+                                            </div> : null}
                                             <p className='hotel-title'>{item.hotel}</p>
                                             <div className="hotel-rating-box">
                                                 <p className='hotel-rating'>{parseFloat(item.rating).toFixed(1)} Puan
